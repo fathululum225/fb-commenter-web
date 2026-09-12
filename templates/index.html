@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FB Auto Commenter</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📘 Facebook Auto Commenter</h1>
+            <p class="subtitle">Multi-account auto comment untuk Facebook Reels</p>
+        </header>
+
+        <!-- FORM -->
+        <div id="form-section" class="card">
+            <h2>⚙️ Konfigurasi</h2>
+
+            <div class="form-group">
+                <label for="target_username">🎯 Target Username Facebook</label>
+                <input type="text" id="target_username" placeholder="contoh: tvrepublik.rumor" value="tvrepublik.rumor">
+                <small>Username Page/Profil Facebook (tanpa @)</small>
+            </div>
+
+            <h3>👥 Akun Pengirim Komentar</h3>
+            <p class="hint">
+                Setiap akun butuh <code>c_user</code> dan <code>xs</code> dari cookie Facebook.
+                <br>Ambil dari: F12 → Application → Cookies → facebook.com
+            </p>
+            <div id="accounts-list"></div>
+            <button type="button" id="add-account" class="btn-secondary">+ Tambah Akun</button>
+
+            <h3>📊 Pengaturan</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Jumlah Reel per Akun</label>
+                    <input type="number" id="max_posts" value="5" min="1" max="20">
+                </div>
+                <div class="form-group">
+                    <label>Komentar per Reel</label>
+                    <input type="number" id="comments_per_post" value="3" min="1" max="20">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Delay antar Komentar (detik)</label>
+                    <div class="range-row">
+                        <input type="number" id="comment_delay_min" value="5" min="1">
+                        <span>—</span>
+                        <input type="number" id="comment_delay_max" value="12" min="1">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Delay antar Akun (detik)</label>
+                    <div class="range-row">
+                        <input type="number" id="account_delay_min" value="60" min="1">
+                        <span>—</span>
+                        <input type="number" id="account_delay_max" value="120" min="1">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="auto_like" checked>
+                    Auto-like setiap reel
+                </label>
+            </div>
+
+            <button type="button" id="start-btn" class="btn-primary">🚀 Mulai Komentar</button>
+            <p class="warning">⚠️ Gunakan dengan bijak. Akun bisa terkena limit jika spam.</p>
+        </div>
+
+        <!-- LOG -->
+        <div id="log-section" class="card hidden">
+            <h2>📋 Log Real-time</h2>
+            <div class="status-row">
+                <span class="status-badge running" id="status-badge">Berjalan</span>
+                <button type="button" id="stop-scroll" class="btn-secondary small">⏸️ Auto-scroll: ON</button>
+                <button type="button" id="new-job" class="btn-secondary small">🔄 Job Baru</button>
+            </div>
+            <pre id="log-output"></pre>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
